@@ -5,7 +5,7 @@ import { logoutUser } from "../actions/login";
 
 const Header = (props) => {
   console.log(props);
-  const { avatarURL, dispatch } = props;
+  const { avatarURL, dispatch, name } = props;
   const handleLogout = () => {
     dispatch(logoutUser());
   };
@@ -16,7 +16,7 @@ const Header = (props) => {
         <span>
           <img className="w-6 h-6 rounded-full" src={avatarURL} alt="avatar" />{" "}
         </span>
-        <span> username </span>
+        <span> {name} </span>
         <button onClick={handleLogout}> Logout</button>
       </div>
     </div>
