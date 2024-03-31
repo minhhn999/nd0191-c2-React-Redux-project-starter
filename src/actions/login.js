@@ -4,10 +4,18 @@ import { receiveUsers } from "./users";
 import { receiveQuestions } from "./questions";
 
 export const LOGIN_USER = "LOGIN_USER";
-export function loginUser(id) {
+export const LOGOUT_USER = "LOGOUT_USER";
+
+export function loginUser(user) {
   return {
     type: LOGIN_USER,
-    id,
+    user,
+  };
+}
+
+export function logoutUser() {
+  return {
+    type: LOGOUT_USER
   };
 }
 
@@ -18,7 +26,7 @@ export function handleLogin(username, password) {
       .then(({ users, questions, user }) => {
         dispatch(receiveUsers(users));
         dispatch(receiveQuestions(questions));
-        dispatch(loginUser(user.id));
+        dispatch(loginUser(user));
       })
       .catch((error) => {
         console.error(error);

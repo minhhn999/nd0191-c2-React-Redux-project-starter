@@ -1,12 +1,28 @@
-import React from 'react'
-import Nav from './Nav'
+import React from "react";
+import Nav from "./Nav";
+import { connect } from "react-redux";
+import { logoutUser } from "../actions/login";
 
-const Header = () => {
+const Header = (props) => {
+  console.log(props);
+  const { avatarURL, dispatch } = props;
+  const handleLogout = () => {
+    dispatch(logoutUser());
+  };
   return (
-    <div>
-        <Nav/>
+    <div className="flex justify-between w-auto py-4">
+      <Nav />
+      <div className="flex space-x-3">
+        <span>
+          <img className="w-6 h-6 rounded-full" src={avatarURL} alt="avatar" />{" "}
+        </span>
+        <span> username </span>
+        <button onClick={handleLogout}> Logout</button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Header
+const mapStateToProps = ({ authedUser }) => authedUser;
+
+export default connect(mapStateToProps)(Header);
