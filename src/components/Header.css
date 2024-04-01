@@ -1,0 +1,19 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.account {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar {
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  margin: 10px;
+}

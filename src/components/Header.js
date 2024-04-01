@@ -2,6 +2,7 @@ import React from "react";
 import Nav from "./Nav";
 import { connect } from "react-redux";
 import { logoutUser } from "../actions/login";
+import './Header.css'
 
 const Header = (props) => {
   console.log(props);
@@ -10,11 +11,11 @@ const Header = (props) => {
     dispatch(logoutUser());
   };
   return (
-    <div className="flex justify-between w-auto py-4">
+    <div className="header-container">
       <Nav />
-      <div className="flex space-x-3">
+      <div className="account">
         <span>
-          <img className="w-6 h-6 rounded-full" src={avatarURL} alt="avatar" />{" "}
+          <img className="avatar" src={avatarURL} alt="avatar" />{" "}
         </span>
         <span> {name} </span>
         <button onClick={handleLogout}> Logout</button>

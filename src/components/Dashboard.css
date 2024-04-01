@@ -1,0 +1,27 @@
+.question-container {
+  display: block;
+  border: 1px solid rgb(224, 223, 223);
+  text-align: center;
+  margin: 32px 0;
+}
+
+.question {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(224, 223, 223);
+  max-width: 300px;
+  gap: 2px;
+  padding: 16px;
+  margin: 16px;
+  border-radius: 4px;
+}
+
+.question-info {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+h3 {
+  margin: 0;
+}

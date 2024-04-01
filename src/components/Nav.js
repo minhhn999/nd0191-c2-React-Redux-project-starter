@@ -1,15 +1,21 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Nav = () => {
   return (
-
-        <nav className=" flex justify-start space-x-3">
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/leaderboard">LeaderBoard</NavLink>
-          <NavLink to="/add">New</NavLink>
-        </nav>
-
+    <nav className="nav">
+      <ul>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/leaderboard">LeaderBoard</Link>
+        </li>
+        <li>
+          <Link to="/add">New</Link>
+        </li>
+      </ul>
+    </nav>
   );
 };
 
