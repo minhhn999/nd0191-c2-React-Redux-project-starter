@@ -15,8 +15,12 @@ const Login = (props) => {
   };
   return (
     <form className="modal-content animate" onSubmit={handleSubmit}>
-      <div className="imgcontainer">
-        <img src={employeePollImage} alt="employee poll" className="login-image" />
+      <div className="img-container">
+        <img
+          src={employeePollImage}
+          alt="employee poll"
+          className="login-image"
+        />
       </div>
 
       <div className="container">

@@ -13,14 +13,14 @@ const NewQuestion = (props) => {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    try{
+    try {
       e.preventDefault();
       await dispatch(handleAddQuestion(optionOne, optionTwo));
       console.log("error from submit", error);
-      navigate("/")
-    } catch(err) {
-      console.error(err)
-    } 
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (

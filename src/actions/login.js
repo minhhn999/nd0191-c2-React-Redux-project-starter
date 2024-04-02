@@ -5,6 +5,7 @@ import { receiveQuestions } from "./questions";
 
 export const LOGIN_USER = "LOGIN_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
+export const GET_AUTHED_USER = "GET_AUTHED_USER";
 
 export function loginUser(user) {
   return {
@@ -16,6 +17,12 @@ export function loginUser(user) {
 export function logoutUser() {
   return {
     type: LOGOUT_USER,
+  };
+}
+export function getAuthedUser(users, id) {
+  return {
+    type: GET_AUTHED_USER,
+    user: users[id],
   };
 }
 

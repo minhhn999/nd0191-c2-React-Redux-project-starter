@@ -1,0 +1,37 @@
+.answer-question-content {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  
+}
+.answer-question-option {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid lightseagreen;
+  padding: 20px;
+
+  & button {
+    margin-bottom: 0;
+  }
+}
+
+.answer-question-option-text {
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  font: bold
+}
+img.answer-question-image {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+}
+
+.img-container {
+  img {
+    margin: 20px 0;
+  }
+}

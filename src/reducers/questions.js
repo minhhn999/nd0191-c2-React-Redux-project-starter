@@ -7,11 +7,11 @@ export default function questions(state = {}, action) {
         ...state,
         ...action.questions,
       };
-      case ADD_QUESTION:
-       return {
+    case ADD_QUESTION:
+      return {
         ...state,
-        [action.question.id]: action.question
-       }
+        [action.question.id]: action.question,
+      };
 
     default:
       return state;
