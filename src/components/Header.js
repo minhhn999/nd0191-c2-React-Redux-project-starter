@@ -11,6 +11,7 @@ const Header = (props) => {
     dispatch(logoutUser());
   };
   return (
+    <>
     <div className="header-container">
       <Nav />
       <div className="account">
@@ -21,6 +22,8 @@ const Header = (props) => {
         <button onClick={handleLogout}> Logout</button>
       </div>
     </div>
+    <hr/>
+    </>
   );
 };
 

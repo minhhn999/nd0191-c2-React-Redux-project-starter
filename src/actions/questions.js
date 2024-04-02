@@ -31,10 +31,16 @@ export function handleAddQuestion(optionOneText, optionTwoText) {
     return saveQuestion({
       optionOneText,
       optionTwoText,
-      author: authedUser,
+      author: authedUser.id,
     })
       .then((question) => dispatch(addQuestion(question)))
-      .then(() => dispatch(hideLoading()));
+      .catch(error => {
+        console.error(error)
+        throw Error(error)
+      })
+      .finally(() => {
+        dispatch(hideLoading())
+      })
   };
 }
 export function handleAnswerQuestion(authedUser, qid, answer) {

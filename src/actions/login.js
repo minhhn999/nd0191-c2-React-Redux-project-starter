@@ -15,7 +15,7 @@ export function loginUser(user) {
 
 export function logoutUser() {
   return {
-    type: LOGOUT_USER
+    type: LOGOUT_USER,
   };
 }
 
@@ -36,4 +36,3 @@ export function handleLogin(username, password) {
       });
   };
 }
-

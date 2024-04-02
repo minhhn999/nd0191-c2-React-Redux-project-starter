@@ -1,0 +1,16 @@
+.nav a.active {
+  font-weight: bold;
+  text-decoration: none;
+  /* Remove default underline */
+  position: relative;
+}
+
+.nav a.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 2px;
+  background-color: rgb(222, 57, 234);
+}

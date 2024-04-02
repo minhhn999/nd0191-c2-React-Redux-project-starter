@@ -23,7 +23,8 @@ const Dashboard = (props) => {
   return (
     <div>
       <div className="question-container">
-        <h2>New Questions</h2>
+
+        <h2 >New Questions</h2>
         <hr />
         <div className="question-info">
           {questionsUnAnswered.map((question) => (
