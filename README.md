@@ -1,6 +1,6 @@
 # Employee Polls Project
 
-This is the starter code for the final assessment project for Udacity's React & Redux course.
+This is the final assessment project for Udacity's React & Redux course.
 
 The `_DATA.js` file represents a fake database and methods that let you access the data. The only thing you need to edit in the ` _DATA.js` file is the value of `avatarURL`. Each user should have an avatar, so you’ll need to add the path to each user’s avatar.
 
@@ -96,3 +96,15 @@ Your code will talk to the database via 4 methods:
 | qid | String | The id of the question that was answered|
 | answer | String | The option the user selected. The value should be either `"optionOne"` or `"optionTwo"`|
 
+## Project structure:
+1. actions: contains all actions of redux
+2. assets: contains background and employee poll image
+3. components: contains all components used in project
+4. middleware: declare middleware using with redux
+5. reducers: contains all reducers of redux
+6. utils: contains all util functions: api, helpers, mock for unit test
+
+## How to run project:
+After pull project, run it with terminal by following commands
+1) npm install
+2) npm start
