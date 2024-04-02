@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import employeePollImage from "../assets/employee_poll.png";
 import { connect } from "react-redux";
 import { handleLogin } from "../actions/login";
@@ -7,12 +7,20 @@ import "./Login.css";
 const Login = (props) => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-
-  const handleSubmit = (e) => {
+  const [isError, setIsError] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
+  const { authedUser, dispatch } = props;
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(userName, password);
-    props.dispatch(handleLogin(userName, password));
+    await dispatch(handleLogin(userName, password));
+    setIsSubmit(true);
   };
+
+  useEffect(() => {
+    if (isSubmit && !authedUser) {
+      setIsError(true);
+    }
+  }, [isError, isSubmit, authedUser]);
   return (
     <form className="modal-content animate" onSubmit={handleSubmit}>
       <div className="img-container">
@@ -24,6 +32,11 @@ const Login = (props) => {
       </div>
 
       <div className="container">
+        {isError && (
+          <div className="error-message" data-testid="error-message">
+            Incorrect Username or Password. Please retry again!
+          </div>
+        )}
         <label htmlFor="uname">
           <b>Username</b>
         </label>
@@ -51,5 +64,9 @@ const Login = (props) => {
     </form>
   );
 };
-
-export default connect()(Login);
+const mapStateToProps = (state) => {
+  return {
+    authedUser: state.authedUser, // Assuming 'authedUser' is in your Redux state
+  };
+};
+export default connect(mapStateToProps)(Login);

@@ -1,12 +1,10 @@
 import React from "react";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import "./LeaderBoard.css";
 
 const LeaderBoard = (props) => {
   const { users } = props;
-  console.log("users", users);
   const userList = Object.entries(users).map(([key, value]) => {
-    console.log(`${key}:${value}`);
     return {
       user: key,
       answered: Object.keys(value.answers).length,
@@ -20,7 +18,6 @@ const LeaderBoard = (props) => {
     const sumB = b.answered + b.created;
     return sumB - sumA; // descending order
   });
-  console.log(JSON.stringify(userList));
 
   return (
     <div className="leader-board-container">
@@ -44,8 +41,8 @@ const LeaderBoard = (props) => {
                   </div>
                 </div>
               </td>
-              <td>{user.answered}</td>
-              <td>{user.created}</td>
+              <td data-testid={`${user.name} answered`}>{user.answered}</td>
+              <td data-testid={`${user.name} created`}>{user.created}</td>
             </tr>
           ))}
         </tbody>

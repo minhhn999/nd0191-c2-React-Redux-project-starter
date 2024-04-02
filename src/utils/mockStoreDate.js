@@ -134,104 +134,21 @@ let questions = {
   },
 };
 
-function generateUID() {
-  return (
-    Math.random().toString(36).substring(2, 15) +
-    Math.random().toString(36).substring(2, 15)
-  );
-}
-
-export function _getUsers() {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve({ ...users }), 500);
-  });
-}
-
-export function _getQuestions() {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve({ ...questions }), 500);
-  });
-}
-
-function formatQuestion({ optionOneText, optionTwoText, author }) {
-  return {
-    id: generateUID(),
-    timestamp: Date.now(),
-    author,
-    optionOne: {
-      votes: [],
-      text: optionOneText,
+export const mockStoreData = {
+  users: users,
+  questions: questions,
+  authedUser: {
+    id: "sarahedo",
+    password: "password123",
+    name: "Sarah Edo",
+    avatarURL:
+      "https://upload.wikimedia.org/wikipedia/commons/5/5f/Liu_Yifei_at_the_2016_BAZAAR_Stars%E2%80%99_Charity_Night.jpg",
+    answers: {
+      "8xf0y6ziyjabvozdd253nd": "optionOne",
+      "6ni6ok3ym7mf1p33lnez": "optionOne",
+      am8ehyc8byjqgar0jgpub9: "optionTwo",
+      loxhs1bqm25b708cmbf3g: "optionTwo",
     },
-    optionTwo: {
-      votes: [],
-      text: optionTwoText,
-    },
-  };
-}
-
-export function _saveQuestion(question) {
-  return new Promise((resolve, reject) => {
-    if (
-      !question.optionOneText ||
-      !question.optionTwoText ||
-      !question.author
-    ) {
-      reject("Please provide optionOneText, optionTwoText, and author");
-    }
-
-    const formattedQuestion = formatQuestion(question);
-    setTimeout(() => {
-      questions = {
-        ...questions,
-        [formattedQuestion.id]: formattedQuestion,
-      };
-
-      resolve(formattedQuestion);
-    }, 500);
-  });
-}
-
-export function _saveQuestionAnswer({ authedUser, qid, answer }) {
-  return new Promise((resolve, reject) => {
-    if (!authedUser || !qid || !answer) {
-      reject("Please provide authedUser, qid, and answer");
-    }
-
-    setTimeout(() => {
-      users = {
-        ...users,
-        [authedUser]: {
-          ...users[authedUser],
-          answers: {
-            ...users[authedUser].answers,
-            [qid]: answer,
-          },
-        },
-      };
-
-      questions = {
-        ...questions,
-        [qid]: {
-          ...questions[qid],
-          [answer]: {
-            ...questions[qid][answer],
-            votes: questions[qid][answer].votes.concat([authedUser]),
-          },
-        },
-      };
-
-      resolve({ users, questions });
-    }, 500);
-  });
-}
-
-export function _login(username, password) {
-  return new Promise((resolve, reject) => {
-    const user = users[username];
-    if (!user || (user && user.password !== password)) {
-      reject("Not found User");
-    }
-
-    setTimeout(() => resolve({ ...user }), 500);
-  });
-}
+    questions: ["8xf0y6ziyjabvozdd253nd", "am8ehyc8byjqgar0jgpub9"],
+  },
+};

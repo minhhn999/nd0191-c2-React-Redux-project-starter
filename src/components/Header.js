@@ -5,9 +5,7 @@ import { logoutUser } from "../actions/login";
 import "./Header.css";
 
 const Header = (props) => {
-  console.log(props);
   const { avatarURL, dispatch, name } = props;
-  console.log(avatarURL);
   const handleLogout = () => {
     dispatch(logoutUser());
   };

@@ -1,237 +1,78 @@
-let users = {
-  sarahedo: {
-    id: "sarahedo",
-    password: "password123",
-    name: "Sarah Edo",
-    avatarURL:
-      "https://upload.wikimedia.org/wikipedia/commons/5/5f/Liu_Yifei_at_the_2016_BAZAAR_Stars%E2%80%99_Charity_Night.jpg",
-    answers: {
-      "8xf0y6ziyjabvozdd253nd": "optionOne",
-      "6ni6ok3ym7mf1p33lnez": "optionOne",
-      am8ehyc8byjqgar0jgpub9: "optionTwo",
-      loxhs1bqm25b708cmbf3g: "optionTwo",
-    },
-    questions: ["8xf0y6ziyjabvozdd253nd", "am8ehyc8byjqgar0jgpub9"],
-  },
-  tylermcginnis: {
-    id: "tylermcginnis",
-    password: "abc321",
-    name: "Tyler McGinnis",
-    avatarURL: "https://tylermcginnis.com/would-you-rather/tyler.jpg",
+import { _saveQuestion, _saveQuestionAnswer } from "./_DATA";
 
-    answers: {
-      vthrdm985a262al8qx3do: "optionOne",
-      xj352vofupe1dqz9emx13r: "optionTwo",
-    },
-    questions: ["loxhs1bqm25b708cmbf3g", "vthrdm985a262al8qx3do"],
-  },
-  mtsamis: {
-    id: "mtsamis",
-    password: "xyz123",
-    name: "Mike Tsamis",
-    avatarURL:
-      "https://nhadepso.com/wp-content/uploads/2023/03/anh-trieu-le-dinh_1.jpg",
+describe("_saveQuestion successfully", () => {
+  it("should save a new question and return it with all expected fields populated", async () => {
+    // Arrange
+    const questionData = {
+      optionOneText: "Option One Text",
+      optionTwoText: "Option Two Text",
+      author: "sarahedo",
+    };
 
-    answers: {
-      xj352vofupe1dqz9emx13r: "optionOne",
-      vthrdm985a262al8qx3do: "optionTwo",
-      "6ni6ok3ym7mf1p33lnez": "optionOne",
-    },
-    questions: ["6ni6ok3ym7mf1p33lnez", "xj352vofupe1dqz9emx13r"],
-  },
-  zoshikanlu: {
-    id: "zoshikanlu",
-    password: "pass246",
-    name: "Zenobia Oshikanlu",
-    avatarURL:
-      "https://www.pixelstalk.net/wp-content/uploads/2016/09/2560x1600-Indian-Actress-Tamanna-Bhatia-HD-Photo.jpg",
+    // Act
+    const savedQuestion = await _saveQuestion(questionData);
+    console.log(savedQuestion);
 
-    answers: {
-      xj352vofupe1dqz9emx13r: "optionOne",
-    },
-    questions: [],
-  },
-};
-
-let questions = {
-  "8xf0y6ziyjabvozdd253nd": {
-    id: "8xf0y6ziyjabvozdd253nd",
-    author: "sarahedo",
-    timestamp: 1467166872634,
-    optionOne: {
-      votes: ["sarahedo"],
-      text: "Build our new application with Javascript",
-    },
-    optionTwo: {
-      votes: [],
-      text: "Build our new application with Typescript",
-    },
-  },
-  "6ni6ok3ym7mf1p33lnez": {
-    id: "6ni6ok3ym7mf1p33lnez",
-    author: "mtsamis",
-    timestamp: 1468479767190,
-    optionOne: {
-      votes: [],
-      text: "hire more frontend developers",
-    },
-    optionTwo: {
-      votes: ["mtsamis", "sarahedo"],
-      text: "hire more backend developers",
-    },
-  },
-  am8ehyc8byjqgar0jgpub9: {
-    id: "am8ehyc8byjqgar0jgpub9",
-    author: "sarahedo",
-    timestamp: 1488579767190,
-    optionOne: {
-      votes: [],
-      text: "conduct a release retrospective 1 week after a release",
-    },
-    optionTwo: {
-      votes: ["sarahedo"],
-      text: "conduct release retrospectives quarterly",
-    },
-  },
-  loxhs1bqm25b708cmbf3g: {
-    id: "loxhs1bqm25b708cmbf3g",
-    author: "tylermcginnis",
-    timestamp: 1482579767190,
-    optionOne: {
-      votes: [],
-      text: "have code reviews conducted by peers",
-    },
-    optionTwo: {
-      votes: ["sarahedo"],
-      text: "have code reviews conducted by managers",
-    },
-  },
-  vthrdm985a262al8qx3do: {
-    id: "vthrdm985a262al8qx3do",
-    author: "tylermcginnis",
-    timestamp: 1489579767190,
-    optionOne: {
-      votes: ["tylermcginnis"],
-      text: "take a course on ReactJS",
-    },
-    optionTwo: {
-      votes: ["mtsamis"],
-      text: "take a course on unit testing with Jest",
-    },
-  },
-  xj352vofupe1dqz9emx13r: {
-    id: "xj352vofupe1dqz9emx13r",
-    author: "mtsamis",
-    timestamp: 1493579767190,
-    optionOne: {
-      votes: ["mtsamis", "zoshikanlu"],
-      text: "deploy to production once every two weeks",
-    },
-    optionTwo: {
-      votes: ["tylermcginnis"],
-      text: "deploy to production once every month",
-    },
-  },
-};
-
-function generateUID() {
-  return (
-    Math.random().toString(36).substring(2, 15) +
-    Math.random().toString(36).substring(2, 15)
-  );
-}
-
-export function _getUsers() {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve({ ...users }), 3000);
+    // Assert
+    expect(savedQuestion).toHaveProperty("id");
+    expect(savedQuestion).toHaveProperty("timestamp");
+    expect(savedQuestion).toHaveProperty("author", questionData.author);
+    expect(savedQuestion).toHaveProperty("optionOne");
+    expect(savedQuestion.optionOne).toHaveProperty("votes", []);
+    expect(savedQuestion.optionOne).toHaveProperty(
+      "text",
+      questionData.optionOneText,
+    );
+    expect(savedQuestion).toHaveProperty("optionTwo");
+    expect(savedQuestion.optionTwo).toHaveProperty("votes", []);
+    expect(savedQuestion.optionTwo).toHaveProperty(
+      "text",
+      questionData.optionTwoText,
+    );
   });
-}
 
-export function _getQuestions() {
-  return new Promise((resolve) => {
-    setTimeout(() => resolve({ ...questions }), 3000);
+  it("should return an error if incorrect data is passed", async () => {
+    // Arrange
+    const incorrectQuestionData = {}; // Empty object without required fields
+
+    // Act & Assert
+    await expect(_saveQuestion(incorrectQuestionData)).rejects.toEqual(
+      "Please provide optionOneText, optionTwoText, and author",
+    );
   });
-}
 
-function formatQuestion({ optionOneText, optionTwoText, author }) {
-  return {
-    id: generateUID(),
-    timestamp: Date.now(),
-    author,
-    optionOne: {
-      votes: [],
-      text: optionOneText,
-    },
-    optionTwo: {
-      votes: [],
-      text: optionTwoText,
-    },
-  };
-}
+  // Additional tests for other incorrect data scenarios can be added here
+});
+describe("_saveQuestionAnswer", () => {
+  it("should save the question answer and return it with all expected fields populated", async () => {
+    // Arrange
+    const authedUser = "sarahedo";
+    const qid = "8xf0y6ziyjabvozdd253nd";
+    const answer = "optionTwo";
 
-export function _saveQuestion(question) {
-  return new Promise((resolve, reject) => {
-    if (
-      !question.optionOneText ||
-      !question.optionTwoText ||
-      !question.author
-    ) {
-      reject("Please provide optionOneText, optionTwoText, and author");
-    }
+    // Act
+    const savedData = await _saveQuestionAnswer({ authedUser, qid, answer });
 
-    const formattedQuestion = formatQuestion(question);
-    setTimeout(() => {
-      questions = {
-        ...questions,
-        [formattedQuestion.id]: formattedQuestion,
-      };
+    // Assert
+    expect(savedData).toHaveProperty("users");
+    expect(savedData).toHaveProperty("questions");
 
-      resolve(formattedQuestion);
-    }, 3000);
+    expect(savedData.users).toHaveProperty(authedUser);
+    expect(savedData.users[authedUser]).toHaveProperty("answers");
+    expect(savedData.users[authedUser].answers).toHaveProperty(qid, answer);
+
+    expect(savedData.questions).toHaveProperty(qid);
+    expect(savedData.questions[qid]).toHaveProperty(answer);
+    expect(savedData.questions[qid][answer]).toHaveProperty("votes");
+    expect(savedData.questions[qid][answer].votes).toEqual([authedUser]);
   });
-}
+  it("should return an error if incorrect data is passed", async () => {
+    // Arrange
+    const incorrectData = {}; // Empty object without required fields
 
-export function _saveQuestionAnswer({ authedUser, qid, answer }) {
-  return new Promise((resolve, reject) => {
-    if (!authedUser || !qid || !answer) {
-      reject("Please provide authedUser, qid, and answer");
-    }
-
-    setTimeout(() => {
-      users = {
-        ...users,
-        [authedUser]: {
-          ...users[authedUser],
-          answers: {
-            ...users[authedUser].answers,
-            [qid]: answer,
-          },
-        },
-      };
-
-      questions = {
-        ...questions,
-        [qid]: {
-          ...questions[qid],
-          [answer]: {
-            ...questions[qid][answer],
-            votes: questions[qid][answer].votes.concat([authedUser]),
-          },
-        },
-      };
-
-      resolve(users, questions);
-    }, 3000);
+    // Act & Assert
+    await expect(_saveQuestionAnswer(incorrectData)).rejects.toEqual(
+      "Please provide authedUser, qid, and answer",
+    );
   });
-}
-
-export function _login(username, password) {
-  return new Promise((resolve, reject) => {
-    const user = users[username];
-    if (!user || (user && user.password !== password)) {
-      reject("Not found User");
-    }
-
-    setTimeout(() => resolve({ ...user }), 3000);
-  });
-}
+});

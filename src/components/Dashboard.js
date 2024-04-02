@@ -8,17 +8,15 @@ const Dashboard = (props) => {
   const questionsAnsweredKeys = Object.keys(questions).filter((x) =>
     Object.keys(authedUser.answers).includes(x),
   );
-  const questionsAnswered = questionsAnsweredKeys.map((x) => questions[x]);
+  const questionsAnswered = questionsAnsweredKeys
+    .map((x) => questions[x])
+    .sort((a, b) => b.timestamp - a.timestamp);
   const questionsUnAnsweredKeys = Object.keys(questions).filter(
     (x) => !Object.keys(authedUser.answers).includes(x),
   );
-  const questionsUnAnswered = questionsUnAnsweredKeys.map((x) => questions[x]);
-
-  // console.log("questionsAnsweredKeys", questionsAnsweredKeys);
-  // console.log("authedUser", Object.keys(authedUser.answers));
-
-  // console.log(questionsAnswered);
-  // console.log(questionsUnAnswered);
+  const questionsUnAnswered = questionsUnAnsweredKeys
+    .map((x) => questions[x])
+    .sort((a, b) => b.timestamp - a.timestamp);
 
   return (
     <div>

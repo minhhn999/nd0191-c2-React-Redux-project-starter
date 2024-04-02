@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./NewQuestion.css";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { handleAddQuestion } from "../actions/questions";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +8,6 @@ const NewQuestion = (props) => {
   const [optionOne, setOptionOne] = useState("");
   const [optionTwo, setOptionTwo] = useState("");
   const { dispatch } = props;
-  const error = useSelector((state) => state.error);
 
   const navigate = useNavigate();
 
@@ -16,7 +15,6 @@ const NewQuestion = (props) => {
     try {
       e.preventDefault();
       await dispatch(handleAddQuestion(optionOne, optionTwo));
-      console.log("error from submit", error);
       navigate("/");
     } catch (err) {
       console.error(err);

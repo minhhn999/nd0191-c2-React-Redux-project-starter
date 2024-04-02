@@ -7,8 +7,6 @@ import { handleAnswerQuestion } from "../actions/questions";
 const AnswerQuestion = (props) => {
   const { question_id } = useParams();
   const { authedUser, questions, users, dispatch } = props;
-  console.log(question_id);
-  console.log(authedUser.answers);
   const isAnswered = Object.keys(authedUser.answers).includes(question_id);
   const question = questions[question_id];
   const totalOptionOneUsers = question.optionOne.votes.length;

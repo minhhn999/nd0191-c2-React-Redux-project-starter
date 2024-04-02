@@ -38,3 +38,7 @@ input[type=text], input[type=password] {
     opacity: 0.8;
   }
   
+  .error-message {
+    color: red;
+    padding: 20px;
+  }

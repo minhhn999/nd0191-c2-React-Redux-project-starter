@@ -23,7 +23,8 @@ function App(props) {
           <Header />
           <Routes>
             <Route path="/" exact element={<Dashboard />} />
-            <Route exact
+            <Route
+              exact
               path="/questions/:question_id"
               element={<AnswerQuestion />}
             />

@@ -51,7 +51,7 @@ export function handleAnswerQuestion(authedUser, qid, answer) {
   return (dispatch) => {
     dispatch(showLoading());
     return saveQuestionAnswer({ authedUser, qid, answer })
-      .then((users, questions) => {
+      .then(({ users, questions }) => {
         dispatch(answerQuestion);
         dispatch(receiveUsers(users));
         dispatch(receiveQuestions(questions));
